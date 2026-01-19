@@ -29,7 +29,7 @@ uv pip install -r requirements.txt
 ```
 
 ```bash
-python 01.py
+python check_lfm2_crop.py
 ```
 
 ```bash
