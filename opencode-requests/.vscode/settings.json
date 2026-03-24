@@ -1,0 +1,6 @@
+{
+  "[json]": {
+    "editor.wordWrapColumn": 120,
+    "editor.wordWrap": "wordWrapColumn"
+  }
+}
