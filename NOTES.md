@@ -9,3 +9,34 @@
   - https://huggingface.co/facebook/sam3
   - https://blog.roboflow.com/what-is-yolo-world/
   - https://github.com/AILab-CVC/YOLO-World
+- https://medium.com/preply-engineering/how-preply-reduced-costs-by-46-before-scaling-llm-features-27a2c0b5af1d
+  - "1. Switch to the latest, more efficient models"
+    - "Run evals comparing the current model against newer models"
+    - "Measure quality degradation"
+    - "Add extra instructions or light tuning where needed"
+    - "Switch where the quality threshold is met as an A/B test"
+  - "2. Ensure prompts are cacheable"
+    - "The rule of thumb is simple: **static content must come first**. When your prompt starts with unchanging instructions or context, the model caches those tokens and only processes what's new."
+    - "If dynamic content appears at the top, every request invalidates the cache and you pay full price."
+    - https://developers.openai.com/api/docs/guides/prompt-caching
+  - "4. Shorten Field Names"
+    - "This is especially helpful when retrieving large lists, where the same key names are repeated many times."
+    - "Even with identical content, using shorter names results in a small but measurable cost reduction. At scale, these savings become more visible."
+    - Example: `"phon"` instead of `"phoneme_symbol"`
+  - "5. Encode Repetitive Constants"
+    - "Categories, tags, and enum values that appear repeatedly in responses can be compressed."
+    - "Instead of outputting long category names like PRESENT_PERFECT_CONTINUOUS or SUBJECT_VERB_AGREEMENT dozens of times, they can be mapped to short codes. For example, PPC or SVA that can be mapped to a human-readable format on an application level."
+    - Note: "This was one of the last optimizations in the list we considered because implementing it properly requires careful prompt engineering. Involving proper explanations of the encoding mappings in the prompt, which adds tokens to your input costs."
+  - "6. Use Efficient Parsers for Structured Data"
+    - "JSON is human-readable but token-hungry. Every bracket, quote, and comma cost money. For some prompts where it really mattered, we moved away from standard JSON to more compact formats."
+    - "(...) the same information represented in JSON uses 72 tokens, while a more compact CSV format brings it down to just 29 tokens, a 60% reduction."
+    - "JSON is the most reliable format since models are heavily trained on it."
+    - "Disclaimer: This optimization is experimental. While it worked well for our specific use case, we recommend thorough validation and evaluation before applying it more broadly. Results may vary depending on your prompts, models, and output complexity."
+    - https://github.com/toon-format/toon
+  - "8. Batch Multiple Inputs Per Request"
+    - "Another cost optimization is to process multiple inputs in a single API call instead of sending separate requests. The savings come from eliminating repeated instruction tokens."
+    - "Quality validation is essential here. Sometimes processing items together affects accuracy and makes the system more prone to hallucinations."
+    - "Moreover, batching increases processing time per request since the model needs to process more content and generate a larger response, though you save on the overhead of making multiple API calls."
+  - "We didn't optimize everything at once. After analyzing API usage over a month, we identified the top 15 prompts by token volume and optimized them one by one. Each optimization was launched as an A/B test to catch any quality degradation early."
+  - "Shortening field names means updating prompts and re-running evaluations. Alternative output formats introduce parsing complexity and potential reliability issues. Batching saves costs but increases latency."
+  - "Switch to smaller models first — Biggest immediate impact with least engineering effort"
