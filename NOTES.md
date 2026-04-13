@@ -40,3 +40,5 @@
   - "We didn't optimize everything at once. After analyzing API usage over a month, we identified the top 15 prompts by token volume and optimized them one by one. Each optimization was launched as an A/B test to catch any quality degradation early."
   - "Shortening field names means updating prompts and re-running evaluations. Alternative output formats introduce parsing complexity and potential reliability issues. Batching saves costs but increases latency."
   - "Switch to smaller models first — Biggest immediate impact with least engineering effort"
+- https://www.youtube.com/watch?v=I82j7AzMU80
+  - Harness: "(...) is the set of tools and the environment in which the agent operates. What that means is it's the thing that the AI can use to generate text to do stuff."
