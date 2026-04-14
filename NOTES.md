@@ -42,3 +42,5 @@
   - "Switch to smaller models first — Biggest immediate impact with least engineering effort"
 - https://www.youtube.com/watch?v=I82j7AzMU80
   - Harness: "(...) is the set of tools and the environment in which the agent operates. What that means is it's the thing that the AI can use to generate text to do stuff."
+  - https://ampcode.com/notes/how-to-build-an-agent
+  - https://www.mihaileric.com/The-Emperor-Has-No-Clothes/
