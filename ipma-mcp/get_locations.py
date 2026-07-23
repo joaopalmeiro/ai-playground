@@ -30,11 +30,11 @@ if __name__ == "__main__":
         response.raise_for_status()
         locations = Locations.validate_json(response.content)
 
-    locals = sorted(loc.local for loc in locations)
+    local_names = sorted(loc.local for loc in locations)
     local_to_id = {loc.local: loc.global_id_local for loc in locations}
 
-    literal_values = ", ".join(f'"{name}"' for name in locals)
-    map_entries = "\n".join(f'"{name}": {local_to_id[name]},' for name in locals)
+    literal_values = ", ".join(f'"{name}"' for name in local_names)
+    map_entries = "\n".join(f'"{name}": {local_to_id[name]},' for name in local_names)
 
     content = f"""from typing import Literal, TypeAlias
 

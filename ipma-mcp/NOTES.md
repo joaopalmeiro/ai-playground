@@ -15,3 +15,30 @@
 - https://github.com/modelcontextprotocol/python-sdk/blob/v2.0.0b1/examples/mcpserver/weather_structured.py
 - https://pydantic.dev/docs/validation/dev/api/pydantic/config/#pydantic.config.ConfigDict.alias_generator
   - https://pydantic.dev/docs/validation/dev/api/pydantic/config/#pydantic.alias_generators.to_camel
+
+## Snippets
+
+```python
+class DailyForecastResponse(BaseModel):
+    model_config = ConfigDict(alias_generator=to_camel)
+
+    precipita_prob: float
+    t_min: float
+    t_max: float
+    pred_wind_dir: Literal["NW", "N"]
+    id_weather_type: int
+    class_wind_speed: int
+    longitude: float
+    forecast_date: date
+    latitude: float
+
+
+class ForecastResponse(BaseModel):
+    model_config = ConfigDict(alias_generator=to_camel)
+
+    owner: Literal["IPMA"]
+    country: Literal["PT"]
+    global_id_local: int
+    data_update: datetime
+    data: list[DailyForecastResponse]
+```
