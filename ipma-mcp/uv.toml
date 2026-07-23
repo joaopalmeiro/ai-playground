@@ -1,5 +1,6 @@
 add-bounds = "exact"
 exclude-newer = "7 days"
+prerelease = "allow"
 python-downloads = "manual"
 python-preference = "only-managed"
 required-version = "==0.11.6"
