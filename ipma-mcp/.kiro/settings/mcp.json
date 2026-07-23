@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "ipma-weather-forecast": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--with",
+        "mcp[cli]==2.0.0b1",
+        "mcp",
+        "run",
+        "/Users/joao.palmeiro/Documents/GitHub/ai-playground/ipma-mcp/server.py"
+      ],
+      "disabled": false,
+      "autoApprove": ["get_weather_forecast"]
+    }
+  }
+}
