@@ -1,3 +1,4 @@
+import unicodedata
 from pathlib import Path
 
 import httpx2
@@ -30,7 +31,10 @@ if __name__ == "__main__":
         response.raise_for_status()
         locations = Locations.validate_json(response.content)
 
-    local_names = sorted(loc.local for loc in locations)
+    local_names = sorted(
+        (loc.local for loc in locations),
+        key=lambda s: s.encode("ascii", "ignore").decode().casefold(),
+    )
     local_to_id = {loc.local: loc.global_id_local for loc in locations}
 
     literal_values = ", ".join(f'"{name}"' for name in local_names)
