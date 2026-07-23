@@ -15,19 +15,19 @@ class HourlyForecast(BaseModel):
     model_config = ConfigDict(alias_generator=to_camel)
 
     t_med: float
-    temp_agua_mar: float
+    temp_agua_mar: float | None = None
     probabilidade_precipita: float
     id_tipo_tempo: int
-    periodo_pico: float
-    ondulacao: float
+    periodo_pico: float | None = None
+    ondulacao: float | None = None
     h_r: float
     data_update: datetime
     utci: float
-    dir_ondulacao: str
+    dir_ondulacao: str | None = None
     ff_vento: float
     global_id_local: int
-    mar_total: float
-    periodo_ondulacao: float
+    mar_total: float | None = None
+    periodo_ondulacao: float | None = None
     id_periodo: Literal[1]
     data_prev: datetime
     dd_vento: str
