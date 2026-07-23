@@ -33,7 +33,7 @@ if __name__ == "__main__":
 
     local_names = sorted(
         (loc.local for loc in locations),
-        key=lambda s: s.encode("ascii", "ignore").decode().casefold(),
+        key=lambda s: unicodedata.normalize("NFKD", s).encode("ascii", "ignore").decode().casefold(),
     )
     local_to_id = {loc.local: loc.global_id_local for loc in locations}
 
