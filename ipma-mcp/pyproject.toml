@@ -2,4 +2,9 @@
 name = "ipma-mcp"
 version = "0.0.0"
 requires-python = ">=3.10.14"
-dependencies = ["mcp[cli]==2.0.0b1", "mypy==1.20.1", "ruff==0.15.11"]
+dependencies = [
+    "httpx2==2.7.0",
+    "mcp[cli]==2.0.0b1",
+    "mypy==1.20.1",
+    "ruff==0.15.11",
+]
