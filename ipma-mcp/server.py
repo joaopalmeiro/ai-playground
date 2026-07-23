@@ -3,13 +3,13 @@ from typing import Literal
 
 import httpx2
 from mcp.server import MCPServer
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, TypeAdapter
 from pydantic.alias_generators import to_camel
 
 mcp = MCPServer("IPMA Weather Forecast")
 
 
-class DailyForecast(BaseModel):
+class DailyForecastResponse(BaseModel):
     model_config = ConfigDict(alias_generator=to_camel)
 
     precipita_prob: float
@@ -30,11 +30,20 @@ class ForecastResponse(BaseModel):
     country: Literal["PT"]
     global_id_local: int
     data_update: datetime
-    data: list[DailyForecast]
+    data: list[DailyForecastResponse]
+
+
+class DailyForecast(BaseModel):
+    min_temperature: float
+    max_temperature: float
+    date: date
+
+
+DailyForecasts = TypeAdapter(list[DailyForecast])
 
 
 @mcp.tool()
-async def get_weather_forecast(city):
+async def get_weather_forecast(city: Literal["Lisboa", "Porto"]) -> DailyForecasts:
     """TODO"""
     async with httpx2.AsyncClient() as client:
         response = await client.get("https://www.example.com/")
