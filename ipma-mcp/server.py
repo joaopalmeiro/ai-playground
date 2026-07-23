@@ -14,56 +14,56 @@ mcp = MCPServer("IPMA Weather Forecast")
 class HourlyForecast(BaseModel):
     model_config = ConfigDict(alias_generator=to_camel)
 
-    id_periodo: Literal[1]
-    id_tipo_tempo: int
-    probabilidade_precipita: float
-    dd_vento: str
-    ff_vento: float
-    data_prev: datetime
-    data_update: datetime
-    global_id_local: int
     t_med: float
-    h_r: float
-    utci: float
     temp_agua_mar: float
+    probabilidade_precipita: float
+    id_tipo_tempo: int
+    periodo_pico: float
     ondulacao: float
+    h_r: float
+    data_update: datetime
+    utci: float
+    dir_ondulacao: str
+    ff_vento: float
+    global_id_local: int
     mar_total: float
     periodo_ondulacao: float
-    periodo_pico: float
-    dir_ondulacao: str
+    id_periodo: Literal[1]
+    data_prev: datetime
+    dd_vento: str
 
 
 class ThreeHourForecast(BaseModel):
     model_config = ConfigDict(alias_generator=to_camel)
 
-    id_periodo: Literal[3]
-    id_tipo_tempo: int
-    probabilidade_precipita: float
-    dd_vento: str
-    ff_vento: float
-    data_prev: datetime
-    data_update: datetime
-    global_id_local: int
     t_med: float
+    id_tipo_tempo: int
     h_r: float
+    data_update: datetime
     utci: float
+    ff_vento: float
+    global_id_local: int
+    probabilidade_precipita: float
+    id_periodo: Literal[3]
+    data_prev: datetime
+    dd_vento: str
 
 
 class DailyForecast(BaseModel):
     model_config = ConfigDict(alias_generator=to_camel)
 
-    id_periodo: Literal[24]
-    id_tipo_tempo: int
-    probabilidade_precipita: float
-    dd_vento: str
-    data_prev: datetime
-    data_update: datetime
-    global_id_local: int
     t_min: float
+    id_ffx_vento: int
+    data_update: datetime
     t_max: float
     i_uv: float | None = None
     intervalo_hora: str | None = None
-    id_ffx_vento: int
+    id_tipo_tempo: int
+    global_id_local: int
+    probabilidade_precipita: float
+    id_periodo: Literal[24]
+    data_prev: datetime
+    dd_vento: str
 
 
 Forecast = Annotated[
@@ -81,7 +81,7 @@ class ModelForecast(BaseModel):
 
 
 @mcp.tool()
-async def get_weather_forecast(local: LocalNames) -> list[DailyForecast]:
+async def get_weather_forecast(local: LocalNames) -> list[ModelForecast]:
     """Get the daily 10-day weather forecast from today for a specific location (such as a city or town) in Portugal."""
 
     local_id = LOCAL_TO_ID[local]
@@ -94,10 +94,11 @@ async def get_weather_forecast(local: LocalNames) -> list[DailyForecast]:
         raw_data = Forecasts.validate_json(response.content)
 
     return [
-        DailyForecast(
-            min_temperature=daily_forecast.t_min,
-            max_temperature=daily_forecast.t_max,
-            date=daily_forecast.forecast_date,
+        ModelForecast(
+            min_temperature=forecast.t_min,
+            max_temperature=forecast.t_max,
+            date=forecast.data_prev.date(),
         )
-        for daily_forecast in raw_data
+        for forecast in raw_data
+        if isinstance(forecast, DailyForecast)
     ]
