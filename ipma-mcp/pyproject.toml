@@ -6,5 +6,6 @@ dependencies = [
     "httpx2==2.7.0",
     "mcp[cli]==2.0.0b1",
     "mypy==1.20.1",
+    "pydantic==2.14.0a1",
     "ruff==0.15.11",
 ]

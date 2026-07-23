@@ -9,7 +9,7 @@ resolution-markers = [
 
 [options]
 prerelease-mode = "allow"
-exclude-newer = "2026-07-16T14:53:22.346841Z"
+exclude-newer = "2026-07-16T15:04:29.303786Z"
 exclude-newer-span = "P7D"
 
 [[package]]
@@ -354,6 +354,7 @@ dependencies = [
     { name = "httpx2" },
     { name = "mcp", extra = ["cli"] },
     { name = "mypy" },
+    { name = "pydantic" },
     { name = "ruff" },
 ]
 
@@ -362,6 +363,7 @@ requires-dist = [
     { name = "httpx2", specifier = "==2.7.0" },
     { name = "mcp", extras = ["cli"], specifier = "==2.0.0b1" },
     { name = "mypy", specifier = "==1.20.1" },
+    { name = "pydantic", specifier = "==2.14.0a1" },
     { name = "ruff", specifier = "==0.15.11" },
 ]
 
