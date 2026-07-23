@@ -21,6 +21,10 @@ uv audit --verbose
 ```
 
 ```bash
+uv run python get_locations.py
+```
+
+```bash
 uv run mcp dev server.py
 ```
 

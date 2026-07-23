@@ -3,8 +3,10 @@ from typing import Literal
 
 import httpx2
 from mcp.server import MCPServer
-from pydantic import BaseModel, ConfigDict, TypeAdapter
+from pydantic import BaseModel, ConfigDict
 from pydantic.alias_generators import to_camel
+
+from constants import LOCAL_TO_ID, LocalNames
 
 mcp = MCPServer("IPMA Weather Forecast")
 
@@ -39,12 +41,24 @@ class DailyForecast(BaseModel):
     date: date
 
 
-DailyForecasts = TypeAdapter(list[DailyForecast])
-
-
 @mcp.tool()
-async def get_weather_forecast(city: Literal["Lisboa", "Porto"]) -> DailyForecasts:
-    """TODO"""
+async def get_weather_forecast(local: LocalNames) -> list[DailyForecast]:
+    """Get the daily weather forecast for up to 5 days for a specific location (such as a city or town) in Portugal."""
+
+    local_id = LOCAL_TO_ID[local]
+
     async with httpx2.AsyncClient() as client:
-        response = await client.get("https://www.example.com/")
-        print(response)
+        url = f"https://api.ipma.pt/open-data/forecast/meteorology/cities/daily/{local_id}.json"
+
+        response = await client.get(url)
+        response.raise_for_status()
+        raw_data = ForecastResponse.model_validate_json(response.content)
+
+    return [
+        DailyForecast(
+            min_temperature=daily_forecast.t_min,
+            max_temperature=daily_forecast.t_max,
+            date=daily_forecast.forecast_date,
+        )
+        for daily_forecast in raw_data.data
+    ]
