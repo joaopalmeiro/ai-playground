@@ -102,3 +102,6 @@ async def get_weather_forecast(local: LocalNames) -> list[ModelForecast]:
         for forecast in raw_data
         if isinstance(forecast, DailyForecast)
     ]
+
+if __name__ == "__main__":
+    mcp.run(transport="streamable-http", port=3001)

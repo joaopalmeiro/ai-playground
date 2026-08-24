@@ -15,6 +15,8 @@
 - https://github.com/modelcontextprotocol/python-sdk/blob/v2.0.0b1/examples/mcpserver/weather_structured.py
 - https://pydantic.dev/docs/validation/dev/api/pydantic/config/#pydantic.config.ConfigDict.alias_generator
   - https://pydantic.dev/docs/validation/dev/api/pydantic/config/#pydantic.alias_generators.to_camel
+- https://py.sdk.modelcontextprotocol.io/run/
+- https://py.sdk.modelcontextprotocol.io/run/#the-mcp-command
 
 ## Snippets
 

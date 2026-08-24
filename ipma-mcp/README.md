@@ -28,6 +28,12 @@ uv run python get_locations.py
 uv run mcp dev server.py
 ```
 
+or
+
+```bash
+uv run python server.py
+```
+
 ```bash
 uv run mypy
 ```
