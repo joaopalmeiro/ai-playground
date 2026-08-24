@@ -21,7 +21,18 @@ uv audit --verbose
 ```
 
 ```bash
+uv run python generate_request.py
+```
+
+```bash
 uv run python main.py
+```
+
+```bash
+curl -X POST http://localhost:8000/ \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: text/event-stream' \
+  -d @request.json
 ```
 
 ```bash

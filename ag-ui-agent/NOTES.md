@@ -11,3 +11,7 @@
 - https://github.com/pydantic/pydantic-ai/tree/6270fb37c1faf51213c4023c00594c95e963eaf8/examples/pydantic_ai_examples/ag_ui
 - https://github.com/CopilotKit/CopilotKit/blob/4c975dad4983a78dc3a34418afe8fd34931480b8/skills/copilotkit-integrations/references/integrations/pydantic-ai.md?plain=1: "`AGUIAdapter.dispatch_request()` runs one AG-UI request and streams the protocol events back as SSE. Never share a single `StateDeps` instance across requests."
 - https://pydantic.dev/docs/ai/overview/install/#slim-install
+- https://pydantic.dev/docs/ai/integrations/ui/ag-ui/#stand-alone-asgi-app
+- https://uvicorn.run/
+- https://docs.astral.sh/ruff/rules/hardcoded-bind-all-interfaces/
+- https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format
