@@ -15,3 +15,7 @@
 - https://uvicorn.run/
 - https://docs.astral.sh/ruff/rules/hardcoded-bind-all-interfaces/
 - https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format
+- https://github.com/assistant-ui/assistant-ui
+  - https://www.assistant-ui.com/
+- https://www.openui.com/
+- https://docs.copilotkit.ai/shared-state
