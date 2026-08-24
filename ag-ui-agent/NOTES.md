@@ -19,3 +19,4 @@
   - https://www.assistant-ui.com/
 - https://www.openui.com/
 - https://docs.copilotkit.ai/shared-state
+- https://learn.microsoft.com/en-us/azure/application-gateway/for-containers/server-sent-events?tabs=server-sent-events-gateway-api: "Server-sent events (SSEs) provide a useful mechanism to enable servers to push real-time updates to web clients over a single HTTP connection. Unlike WebSockets, which allow bidirectional communication, SSEs are unidirectional: the server sends data to the client without expecting any responses."
